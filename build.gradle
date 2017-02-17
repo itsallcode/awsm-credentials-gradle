@@ -1,0 +1,49 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.9.7'
+}
+
+repositories {
+   jcenter()
+}
+
+version = '0.0.1'
+group = 'com.github.kaklakariada'
+
+ext {
+  gradlePluginId = 'com.github.kaklakariada.awsm-credentials-gradle'
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.6.5'
+}
+
+gradlePlugin {
+    plugins {
+        openFastTrackPlugin {
+            id = gradlePluginId
+            implementationClass = 'awsm.AwsmCredentialsPlugin'
+        }
+    }
+}
+
+pluginBundle {
+  website = 'https://github.com/hamstercommunity/awsm-credentials-gradle/blob/master/README.md'
+  vcsUrl = 'https://github.com/hamstercommunity/awsm-credentials-gradle'
+  description = 'Get AWS credentials for S3 maven repos from default AWS credentials provider chain'
+  tags = ['aws', 'credentials', 's3']
+
+  plugins {
+    awsmCredentialsPlugin {
+      id = gradlePluginId
+      displayName = 'Awsm Credentials Plugin'
+    }
+  }
+}
+
+test {
+    testLogging {
+        showStandardStreams = true
+    }
+}
