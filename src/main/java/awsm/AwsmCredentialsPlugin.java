@@ -23,7 +23,6 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.repositories.ArtifactRepository;
 import org.gradle.api.credentials.AwsCredentials;
-import org.gradle.api.credentials.Credentials;
 import org.gradle.api.internal.artifacts.repositories.DefaultMavenArtifactRepository;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.publish.PublishingExtension;
@@ -85,14 +84,20 @@ public class AwsmCredentialsPlugin implements Plugin<Project>
             return gradleAwsCredentials;
         }
         final AWSCredentials awsCredentials = new DefaultAWSCredentialsProviderChain().getCredentials();
-        logger.lifecycle("Got AWS credentials {} with access key {}", awsCredentials, awsCredentials.getAWSAccessKeyId());
-        gradleAwsCredentials = new DefaultAwsCredentials();
-        gradleAwsCredentials.setAccessKey(awsCredentials.getAWSAccessKeyId());
-        gradleAwsCredentials.setSecretKey(awsCredentials.getAWSSecretKey());
+        logger.info("Got AWS credentials {} with access key {}", awsCredentials, awsCredentials.getAWSAccessKeyId());
+        gradleAwsCredentials = createGradleAwsCredentials(awsCredentials);
+        return gradleAwsCredentials;
+    }
+
+    private static DefaultAwsCredentials createGradleAwsCredentials(final AWSCredentials awsCredentials)
+    {
+        final DefaultAwsCredentials credentials = new DefaultAwsCredentials();
+        credentials.setAccessKey(awsCredentials.getAWSAccessKeyId());
+        credentials.setSecretKey(awsCredentials.getAWSSecretKey());
         if (awsCredentials instanceof AWSSessionCredentials)
         {
-            gradleAwsCredentials.setSessionToken(((AWSSessionCredentials) awsCredentials).getSessionToken());
+            credentials.setSessionToken(((AWSSessionCredentials) awsCredentials).getSessionToken());
         }
-        return gradleAwsCredentials;
+        return credentials;
     }
 }
