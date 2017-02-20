@@ -4,6 +4,12 @@ Get AWS credentials for S3 maven repos from default AWS credentials provider cha
 ## Usage
 
 1. Add this plugin to your project, see https://plugins.gradle.org/plugin/com.github.kaklakariada.awsm-credentials-gradle
+
+    ```groovy
+plugins {
+  id "com.github.kaklakariada.awsm-credentials-gradle" version "0.0.1"
+}
+```
 2. Configure your AWS credentials as [named profiles](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-multiple-profiles) in `~/.aws/credentials` (*not* in `~/.aws/config`). Use `role_arn` and `source_profile` for [role delegation](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#using-aws-iam-roles):
 
     ```ini
@@ -24,7 +30,6 @@ source_profile = root-credentials
     ```properties
 systemProp.aws.profile = delegate-account1
 ```
-
 
 ## Development
 
@@ -51,5 +56,10 @@ $ ./gradlew licenseFormatMain licenseFormatTest
 
 See https://plugins.gradle.org/docs/submit for details.
 
-1. Add API Key for https://plugins.gradle.org to `~/.gradle/gradle.properties`
+1. Add API Key from https://plugins.gradle.org to `~/.gradle/gradle.properties`:
+
+    ```
+gradle.publish.key = ...
+gradle.publish.secret = ...
+```
 2. Run `./gradlew publishPlugins`
