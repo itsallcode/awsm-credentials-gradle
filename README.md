@@ -7,7 +7,7 @@ Get AWS credentials for S3 maven repos from default AWS credentials provider cha
 
     ```gradle
     plugins {
-      id "com.github.kaklakariada.awsm-credentials-gradle" version "0.0.1"
+      id "com.github.kaklakariada.awsm-credentials-gradle" version "0.2.0"
     }
     ```
 2. Configure your AWS credentials as [named profiles](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-multiple-profiles) in `~/.aws/credentials` (*not* in `~/.aws/config`). Use `role_arn` and `source_profile` for [role delegation](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#using-aws-iam-roles):
