@@ -6,57 +6,57 @@ Get AWS credentials for S3 maven repos from default AWS credentials provider cha
 1. Add this plugin to your project, see https://plugins.gradle.org/plugin/com.github.kaklakariada.awsm-credentials-gradle
 
     ```gradle
-plugins {
-  id "com.github.kaklakariada.awsm-credentials-gradle" version "0.0.1"
-}
-```
+    plugins {
+      id "com.github.kaklakariada.awsm-credentials-gradle" version "0.0.1"
+    }
+    ```
 2. Configure your AWS credentials as [named profiles](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-multiple-profiles) in `~/.aws/credentials` (*not* in `~/.aws/config`). Use `role_arn` and `source_profile` for [role delegation](http://docs.aws.amazon.com/cli/latest/topic/config-vars.html#using-aws-iam-roles):
 
     ```ini
-[root-credentials]
-aws_access_key_id = ...
-aws_secret_access_key = ...
-
-[delegate-account1]
-role_arn = arn:aws:iam::<account>:role/<role name>
-source_profile = root-credentials
-
-[delegate-account2]
-role_arn = arn:aws:iam::<account>:role/<role name>
-source_profile = root-credentials
-```
+    [root-credentials]
+    aws_access_key_id = ...
+    aws_secret_access_key = ...
+    
+    [delegate-account1]
+    role_arn = arn:aws:iam::<account>:role/<role name>
+    source_profile = root-credentials
+    
+    [delegate-account2]
+    role_arn = arn:aws:iam::<account>:role/<role name>
+    source_profile = root-credentials
+    ```
 3. Configure the AWS profile you want to use in `~/.gradle/gradle.properties`:
 
     ```properties
-systemProp.aws.profile = delegate-account1
-```
+    systemProp.aws.profile = delegate-account1
+    ```
 4. Add S3 maven repositories to your project without specifying credentials. The plugin will automatically add credentials for repositories with `s3://` urls.
   * Dependency repositories:
 
     ```gradle
-repositories {
-   maven {
-       url "s3://bucket/path/to/repo"
-   }
-}
-```
+    repositories {
+       maven {
+           url "s3://bucket/path/to/repo"
+       }
+    }
+    ```
   * Publishing repositories:
 
     ```gradle
-plugins {
-    id "maven-publish"
-}
-publishing {
-    repositories {
-        maven {
-            url "s3://bucket/path/to/repo"
+    plugins {
+        id "maven-publish"
+    }
+    publishing {
+        repositories {
+            maven {
+                url "s3://bucket/path/to/repo"
+            }
+        }
+        publications {
+            // ...
         }
     }
-    publications {
-        // ...
-    }
-}
-```
+    ```
 
 
 ## Development
@@ -74,7 +74,7 @@ Import into eclipse using [buildship](https://projects.eclipse.org/projects/tool
 3. Select Project root directory
 4. Click "Finish"
 
-### Generate license header for added files:
+### Generate license file header
 
 ```bash
 $ ./gradlew licenseFormatMain licenseFormatTest
@@ -87,7 +87,7 @@ See https://plugins.gradle.org/docs/submit for details.
 1. Add API Key from https://plugins.gradle.org to `~/.gradle/gradle.properties`:
 
     ```
-gradle.publish.key = ...
-gradle.publish.secret = ...
-```
+    gradle.publish.key = ...
+    gradle.publish.secret = ...
+    ```
 2. Run `./gradlew publishPlugins`
