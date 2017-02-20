@@ -15,6 +15,7 @@ ext {
 }
 
 dependencies {
+    compile 'com.amazonaws:aws-java-sdk-sts:1.11.93'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.6.5'
 }
