@@ -30,7 +30,7 @@ Get AWS credentials for S3 maven repos from default AWS credentials provider cha
     ```properties
     systemProp.aws.profile = delegate-account1
     ```
-4. Add S3 maven repositories to your project without specifying credentials. The plugin will automatically add credentials for repositories with `s3://` urls.
+4. Add S3 maven repositories without specifying credentials. The plugin will automatically add credentials for repositories with `s3://` urls in all projects.
   * Dependency repositories:
 
     ```gradle

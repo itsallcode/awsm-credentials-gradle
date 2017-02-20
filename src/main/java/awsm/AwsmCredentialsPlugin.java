@@ -42,6 +42,11 @@ public class AwsmCredentialsPlugin implements Plugin<Project>
     public void apply(Project project)
     {
         this.logger = project.getLogger();
+        project.getAllprojects().forEach(this::applyForProject);
+    }
+
+    public void applyForProject(Project project)
+    {
         project.afterEvaluate(p -> {
             project.getRepositories().all(this::repositoryAdded);
             final PublishingExtension publishingExtension = project.getExtensions().getByType(PublishingExtension.class);
