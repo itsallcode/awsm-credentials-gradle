@@ -5,7 +5,7 @@ Get AWS credentials for S3 maven repos from default AWS credentials provider cha
 
 1. Add this plugin to your project, see https://plugins.gradle.org/plugin/com.github.kaklakariada.awsm-credentials-gradle
 
-    ```groovy
+    ```gradle
 plugins {
   id "com.github.kaklakariada.awsm-credentials-gradle" version "0.0.1"
 }
@@ -30,6 +30,34 @@ source_profile = root-credentials
     ```properties
 systemProp.aws.profile = delegate-account1
 ```
+4. Add S3 maven repositories to your project without specifying credentials. The plugin will automatically add credentials for repositories with `s3://` urls.
+  * Dependency repositories:
+
+    ```gradle
+repositories {
+   maven {
+       url "s3://bucket/path/to/repo"
+   }
+}
+```
+  * Publishing repositories:
+
+    ```gradle
+plugins {
+    id "maven-publish"
+}
+publishing {
+    repositories {
+        maven {
+            url "s3://bucket/path/to/repo"
+        }
+    }
+    publications {
+        // ...
+    }
+}
+```
+
 
 ## Development
 
