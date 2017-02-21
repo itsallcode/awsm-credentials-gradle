@@ -48,7 +48,7 @@ public class AwsmCredentialsPlugin implements Plugin<Project>
     {
         project.afterEvaluate(p -> {
             project.getRepositories().all(this::repositoryAdded);
-            final PublishingExtension publishingExtension = project.getExtensions().getByType(PublishingExtension.class);
+            final PublishingExtension publishingExtension = project.getExtensions().findByType(PublishingExtension.class);
             if (publishingExtension != null)
             {
                 publishingExtension.getRepositories().all(this::repositoryAdded);
