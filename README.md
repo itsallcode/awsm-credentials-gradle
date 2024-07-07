@@ -1,6 +1,12 @@
 # awsm-credentials-gradle
 Get AWS credentials for S3 maven repos from default AWS credentials provider chain
 
+# ⚠️ This project is deprecated ⚠️
+
+Gradle now supports S3 maven repos out-of-the-box:
+* [Official Documentation](https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:s3-repositories)
+* Blog post: [Using an AWS S3 Bucket as your Maven repository in a Gradle project](https://kevcodez.de/posts/2020-02-02-s3-maven-repository-gradle/)
+
 ## Usage
 
 1. Add this plugin to your project, see https://plugins.gradle.org/plugin/com.github.kaklakariada.awsm-credentials-gradle
